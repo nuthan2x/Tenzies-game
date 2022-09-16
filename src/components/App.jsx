@@ -11,13 +11,14 @@ function App() {
   const [diearray, setdiearray] = useState(setdie());
   const [Allsame, setAllsame] = useState(false);
   var [rolls, setrolls] = useState(0);
+  var [totalrolls, settotalrolls] = useState(0);
 
   useEffect(() => {
     
     let x = diearray.every(die => die.isSame)
   
     let y = diearray.every(die => die.value === diearray[0].value)
-    if(x && y) { setAllsame(true);  setrolls(0);  } 
+    if(x && y) { setAllsame(true);   settotalrolls(rolls); setrolls(0); } 
     
   }, [diearray]);
 
@@ -34,7 +35,7 @@ function App() {
   
  
   function handleclick(event) {
-    setrolls(rolls + 1)
+    Allsame ? setrolls(rolls) : setrolls(rolls + 1)
     const x = setdie()
     Allsame &&  setAllsame(false)
     Allsame ? setdiearray(x) :
@@ -69,7 +70,7 @@ function App() {
         <div className="dice-container">     
         {diceelements}
         </div>
-        <h5>{`total rolls: ${rolls}`}</h5>
+        <h5>{Allsame ? `total rolls: ${totalrolls}` : `total rolls: ${rolls}` }</h5>
         <button onClick={handleclick} className={ Allsame ? "btn1" : "btn"}>{ Allsame ? "New game" : "roll"}</button>
       </div>
       {Allsame && <Confetti />}
