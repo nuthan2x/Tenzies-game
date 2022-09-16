@@ -17,7 +17,7 @@ function App() {
     let x = diearray.every(die => die.isSame)
   
     let y = diearray.every(die => die.value === diearray[0].value)
-    if(x && y) { setAllsame(true) } 
+    if(x && y) { setAllsame(true);  setrolls(0);  } 
     
   }, [diearray]);
 
